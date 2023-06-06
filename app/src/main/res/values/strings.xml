@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">eater</string>
+    <string name="title_home">Главная</string>
+    <string name="title_category">Поиск</string>
+    <string name="title_basket">Корзина</string>
+    <string name="title_profile">Аккаунт</string>
+</resources>
