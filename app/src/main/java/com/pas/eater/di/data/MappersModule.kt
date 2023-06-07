@@ -16,8 +16,35 @@ object MappersModule {
         return MapDishesPojoToDishesEntity()
     }
 
+
     @Provides
-    fun provideMapCategoryPojoToCategoryEntity(): MapCategoryPojoToCategoryEntity {
-        return MapCategoryPojoToCategoryEntity()
+    @Singleton
+    fun provideMapCategory(
+        categoryPojoToCategory: MapCategoryPojoToCategory,
+        categoryToCategoryEntity: MapCategoryToCategoryEntity,
+        categoryEntityToCategory: MapCategoryEntityToCategory
+    ): MapCategory {
+        return MapCategory(
+            categoryPojoToCategory = categoryPojoToCategory,
+            categoryToCategoryEntity = categoryToCategoryEntity,
+            categoryEntityToCategory = categoryEntityToCategory
+        )
     }
+
+
+    @Provides
+    fun provideMapCategoryPojoToCategory(): MapCategoryPojoToCategory {
+        return MapCategoryPojoToCategory()
+    }
+
+    @Provides
+    fun provideMapCategoryPojoToCategoryEntity(): MapCategoryToCategoryEntity {
+        return MapCategoryToCategoryEntity()
+    }
+
+    @Provides
+    fun provideMapCategoryEntityToCategory(): MapCategoryEntityToCategory {
+        return MapCategoryEntityToCategory()
+    }
+
 }
