@@ -11,11 +11,15 @@ import com.google.android.material.navigation.NavigationBarView.LABEL_VISIBILITY
 import com.pas.eater.R
 import com.pas.eater.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
+import pas.eater.data.data_sourse.api.ApiService
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity: AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+
+    @Inject lateinit var apiService: ApiService
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,6 +29,10 @@ class MainActivity: AppCompatActivity() {
 
         setSupportActionBar(binding.fakeToolbar.toolbar)
 
+        navigationSettings()
+    }
+
+    private fun navigationSettings() {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.navController
