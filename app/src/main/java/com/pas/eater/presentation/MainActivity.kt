@@ -1,7 +1,9 @@
 package com.pas.eater.presentation
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -10,16 +12,19 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView.LABEL_VISIBILITY_LABELED
 import com.pas.eater.R
 import com.pas.eater.databinding.ActivityMainBinding
+import com.pas.eater.domain.repository.CategoriesRepository
 import dagger.hilt.android.AndroidEntryPoint
-import pas.eater.data.data_sourse.api.ApiService
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class MainActivity: AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
+
+    @Inject
+    lateinit var repo: CategoriesRepository
 
     private lateinit var binding: ActivityMainBinding
 
-    @Inject lateinit var apiService: ApiService
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +35,18 @@ class MainActivity: AppCompatActivity() {
         setSupportActionBar(binding.fakeToolbar.toolbar)
 
         navigationSettings()
+
+        lifecycleScope.launch {
+          repo.getCategoriesFromApi().data?.let {
+                repo.insertCategories(it)
+            }
+        }
+
+        lifecycleScope.launch {
+            repo.getCategoriesFromDB().collect {
+                Log.w("TEST", it.toString())
+            }
+        }
     }
 
     private fun navigationSettings() {
