@@ -60,8 +60,9 @@ dependencies {
     implementation "com.google.dagger:hilt-android:$hilt_version"
     kapt "com.google.dagger:hilt-compiler:$hilt_version"
 
+    //room
+    compileOnly 'androidx.room:room-ktx:2.5.1'
 
-    
     //GSON
     compileOnly "com.google.code.gson:gson:$gson_version"
 
@@ -73,6 +74,11 @@ dependencies {
     compileOnly "com.squareup.retrofit2:retrofit:$retrofit2_version"
     compileOnly "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2"
     compileOnly "com.squareup.retrofit2:converter-gson:$retrofit2_version"
+
+    // Coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
+
 
     implementation project(':data')
     implementation project(':domain')
