@@ -1,4 +1,4 @@
-package pas.eater.data.data_sourse.api.helper
+package com.pas.eater.data.data_sourse.api.helper
 
 import okio.IOException
 

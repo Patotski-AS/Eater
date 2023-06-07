@@ -1,7 +1,7 @@
-package pas.eater.data.data_sourse.api
+package com.pas.eater.data.data_sourse.api
 
-import pas.eater.data.data_sourse.api.pojo.CategoriesResponse
-import pas.eater.data.data_sourse.api.pojo.DisheResponse
+import com.pas.eater.data.data_sourse.api.pojo.CategoriesResponse
+import com.pas.eater.data.data_sourse.api.pojo.DisheResponse
 import retrofit2.http.GET
 
 interface ApiService {
