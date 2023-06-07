@@ -12,7 +12,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView.LABEL_VISIBILITY_LABELED
 import com.pas.eater.R
 import com.pas.eater.databinding.ActivityMainBinding
-import com.pas.eater.domain.repository.CategoriesRepository
+import com.pas.eater.domain.repository.DishesRepository
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -21,7 +21,7 @@ import javax.inject.Inject
 class MainActivity : AppCompatActivity() {
 
     @Inject
-    lateinit var repo: CategoriesRepository
+    lateinit var repo: DishesRepository
 
     private lateinit var binding: ActivityMainBinding
 
@@ -37,13 +37,13 @@ class MainActivity : AppCompatActivity() {
         navigationSettings()
 
         lifecycleScope.launch {
-          repo.getCategoriesFromApi().data?.let {
-                repo.insertCategories(it)
+            repo.getDishesFromApi().data?.let {
+                repo.insertDishes(it)
             }
         }
 
         lifecycleScope.launch {
-            repo.getCategoriesFromDB().collect {
+            repo.getDishesFromDB().collect {
                 Log.w("TEST", it.toString())
             }
         }

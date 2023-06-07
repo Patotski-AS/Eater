@@ -5,7 +5,10 @@ import com.pas.eater.data.mappers.MapCategory
 import com.pas.eater.data.mappers.MapCategoryEntityToCategory
 import com.pas.eater.data.mappers.MapCategoryPojoToCategory
 import com.pas.eater.data.mappers.MapCategoryToCategoryEntity
-import com.pas.eater.data.mappers.MapDishesPojoToDishesEntity
+import com.pas.eater.data.mappers.MapDishToDisheEntity
+import com.pas.eater.data.mappers.MapDisheEntityToDish
+import com.pas.eater.data.mappers.MapDishes
+import com.pas.eater.data.mappers.MapDishesPojoToDish
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -20,12 +23,6 @@ object MappersModule {
     fun provideErrorMapper(): ErrorMapper {
         return ErrorMapper()
     }
-
-    @Provides
-    fun provideMapDishesPojoToDishesEntity(): MapDishesPojoToDishesEntity {
-        return MapDishesPojoToDishesEntity()
-    }
-
 
     @Provides
     @Singleton
@@ -57,4 +54,32 @@ object MappersModule {
         return MapCategoryEntityToCategory()
     }
 
+    @Provides
+    @Singleton
+    fun provideMapDishes(
+        dishesPojoToDish: MapDishesPojoToDish,
+        dishToDisheEntity: MapDishToDisheEntity,
+        disheEntityToDish: MapDisheEntityToDish
+    ): MapDishes {
+        return MapDishes(
+            dishesPojoToDish = dishesPojoToDish,
+            dishToDisheEntity = dishToDisheEntity,
+            disheEntityToDish = disheEntityToDish
+        )
+    }
+
+    @Provides
+    fun provideMapDishesPojoToDish(): MapDishesPojoToDish {
+        return MapDishesPojoToDish()
+    }
+
+    @Provides
+    fun provideMapDishToDisheEntity(): MapDishToDisheEntity {
+        return MapDishToDisheEntity()
+    }
+
+    @Provides
+    fun provideMapDisheEntityToDish(): MapDisheEntityToDish {
+        return MapDisheEntityToDish()
+    }
 }
