@@ -6,6 +6,8 @@ buildscript {
         retrofit2_version = "2.9.0"
         okhttp3_version = '5.0.0-alpha.2'
         gson_version = '2.10.1'
+        room_version = '2.5.1'
+        coroutines_version = '1.6.4'
     }
 
     dependencies {

@@ -8,8 +8,8 @@ import dagger.hilt.components.SingletonComponent
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import pas.eater.data.data_sourse.api.ApiService
-import pas.eater.data.data_sourse.api.helper.RemoteException
+import com.pas.eater.data.data_sourse.api.ApiService
+import com.pas.eater.data.data_sourse.api.helper.RemoteException
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.net.HttpURLConnection
