@@ -12,16 +12,22 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView.LABEL_VISIBILITY_LABELED
 import com.pas.eater.R
 import com.pas.eater.databinding.ActivityMainBinding
-import com.pas.eater.domain.repository.DishesRepository
+import com.pas.eater.domain.repository.CategoriesRepository
+import com.pas.eater.domain.use_case.GetCategoriesUseCase
+import com.pas.eater.domain.use_case.UpdateCategoriesUseCase
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class MainActivity: AppCompatActivity() {
 
-    @Inject
-    lateinit var repo: DishesRepository
+    @Inject lateinit var updateUseCase: UpdateCategoriesUseCase
+
+    @Inject lateinit var getUseCase: GetCategoriesUseCase
+
+    @Inject lateinit var repo: CategoriesRepository
 
     private lateinit var binding: ActivityMainBinding
 
@@ -37,14 +43,14 @@ class MainActivity : AppCompatActivity() {
         navigationSettings()
 
         lifecycleScope.launch {
-            repo.getDishesFromApi().data?.let {
-                repo.insertDishes(it)
+            updateUseCase.invoke().collect {
+                Log.w("TEST", it.toString())
             }
         }
 
         lifecycleScope.launch {
-            repo.getDishesFromDB().collect {
-                Log.w("TEST", it.toString())
+            getUseCase.invoke().stateIn(lifecycleScope).collect {
+                Log.w("TEST1", it.toString())
             }
         }
     }
