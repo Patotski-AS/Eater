@@ -12,9 +12,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView.LABEL_VISIBILITY_LABELED
 import com.pas.eater.R
 import com.pas.eater.databinding.ActivityMainBinding
-import com.pas.eater.domain.repository.CategoriesRepository
-import com.pas.eater.domain.use_case.GetCategoriesUseCase
-import com.pas.eater.domain.use_case.UpdateCategoriesUseCase
+import com.pas.eater.domain.use_case.GetDishesUseCase
+import com.pas.eater.domain.use_case.UpdateDishesUseCase
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
@@ -23,14 +22,11 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class MainActivity: AppCompatActivity() {
 
-    @Inject lateinit var updateUseCase: UpdateCategoriesUseCase
+    @Inject lateinit var updateUseCase: UpdateDishesUseCase
 
-    @Inject lateinit var getUseCase: GetCategoriesUseCase
-
-    @Inject lateinit var repo: CategoriesRepository
+    @Inject lateinit var getUseCase: GetDishesUseCase
 
     private lateinit var binding: ActivityMainBinding
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
