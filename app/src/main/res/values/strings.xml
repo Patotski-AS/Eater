@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">eater</string>
+    <string name="title_home">Главная</string>
+    <string name="title_category">Поиск</string>
+    <string name="title_basket">Корзина</string>
+    <string name="title_profile">Аккаунт</string>
+    <string name="text_button_pay">Оплатить</string>
+    <string name="text_button_add_to_basket">Добавить в корзину</string>
+    <string name="description_add_to_favorite">Add to favorites button</string>
+    <string name="description_button_close">Button close</string>
+    <string name="description_dishes_image">Dishes Image</string>
+</resources>
