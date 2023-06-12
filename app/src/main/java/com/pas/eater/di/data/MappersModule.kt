@@ -1,6 +1,9 @@
 package com.pas.eater.di.data
 
 import com.pas.eater.data.mappers.ErrorMapper
+import com.pas.eater.data.mappers.MapBasket
+import com.pas.eater.data.mappers.MapBasketItemEntityToBasketItem
+import com.pas.eater.data.mappers.MapBasketItemToBasketItemEntity
 import com.pas.eater.data.mappers.MapCategory
 import com.pas.eater.data.mappers.MapCategoryEntityToCategory
 import com.pas.eater.data.mappers.MapCategoryPojoToCategory
@@ -29,7 +32,7 @@ object MappersModule {
     fun provideMapCategory(
         categoryPojoToCategory: MapCategoryPojoToCategory,
         categoryToCategoryEntity: MapCategoryToCategoryEntity,
-        categoryEntityToCategory: MapCategoryEntityToCategory
+        categoryEntityToCategory: MapCategoryEntityToCategory,
     ): MapCategory {
         return MapCategory(
             categoryPojoToCategory = categoryPojoToCategory,
@@ -59,7 +62,7 @@ object MappersModule {
     fun provideMapDishes(
         dishesPojoToDish: MapDishesPojoToDish,
         dishToDisheEntity: MapDishToDisheEntity,
-        disheEntityToDish: MapDisheEntityToDish
+        disheEntityToDish: MapDisheEntityToDish,
     ): MapDishes {
         return MapDishes(
             dishesPojoToDish = dishesPojoToDish,
@@ -82,4 +85,27 @@ object MappersModule {
     fun provideMapDisheEntityToDish(): MapDisheEntityToDish {
         return MapDisheEntityToDish()
     }
+
+
+    @Provides
+    @Singleton
+    fun provideMapBasket(
+        itemToEntity: MapBasketItemToBasketItemEntity,
+        entityToItem: MapBasketItemEntityToBasketItem,
+    ): MapBasket {
+        return MapBasket(
+            itemToEntity = itemToEntity, entityToItem = entityToItem
+        )
+    }
+
+    @Provides
+    fun provideMapBasketItemToBasketItemEntity(): MapBasketItemToBasketItemEntity {
+        return MapBasketItemToBasketItemEntity()
+    }
+
+    @Provides
+    fun provideMapBasketItemEntityToBasketItem(): MapBasketItemEntityToBasketItem {
+        return MapBasketItemEntityToBasketItem()
+    }
+
 }
