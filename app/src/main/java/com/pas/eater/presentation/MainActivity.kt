@@ -1,5 +1,6 @@
 package com.pas.eater.presentation
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -14,11 +15,12 @@ import com.pas.eater.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class MainActivity: AppCompatActivity() {
 
     private var _binding: ActivityMainBinding? = null
     val binding get() = _binding
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -27,6 +29,11 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(binding?.tbHome?.toolbarHome)
         supportActionBar?.setDisplayShowTitleEnabled(false)
+
+        binding?.let {
+            it.tbHome.tvCity.text = "Санкт-Петербург"
+            it.tbHome.tvData.text = "12 августа, 2023"
+        }
 
         navigationSettings()
     }
@@ -49,10 +56,10 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
 
-        navController.addOnDestinationChangedListener { _, destination, _ ->
-            when (destination.id) {
-                R.id.navigation_category -> binding?.tbHome?.toolbarHome?.visibility = View.GONE
-                else -> binding?.tbHome?.toolbarHome?.visibility = View.VISIBLE
+        navController.addOnDestinationChangedListener {_, destination, _->
+            when(destination.id) {
+                R.id.navigation_category->binding?.tbHome?.toolbarHome?.visibility = View.GONE
+                else->binding?.tbHome?.toolbarHome?.visibility = View.VISIBLE
             }
         }
 
