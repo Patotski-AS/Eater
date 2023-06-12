@@ -11,6 +11,7 @@
     <ImageView
         android:id="@+id/iv_image"
         android:layout_width="62dp"
+        android:background="@drawable/style_image"
         android:layout_height="match_parent"
         android:contentDescription="@string/description_dishes_image"
         android:scaleType="fitXY"
@@ -86,6 +87,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="#EFEEEC"
             android:orientation="horizontal">
 
             <ImageView
