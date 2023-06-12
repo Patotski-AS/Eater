@@ -8,7 +8,6 @@
         android:title="@string/title_home" />
 
     <item
-        android:id="@+id/navigation_category"
         android:enabled="true"
         android:icon="@drawable/ic_search"
         android:title="@string/title_category" />
@@ -20,9 +19,8 @@
         android:title="@string/title_basket" />
 
     <item
-        android:id="@+id/navigation_profile"
         android:enabled="true"
         android:icon="@drawable/ic_profile"
-        android:title="@string/title_basket" />
+        android:title="@string/title_profile" />
 
 </menu>

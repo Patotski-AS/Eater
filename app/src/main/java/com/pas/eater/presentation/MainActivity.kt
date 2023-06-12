@@ -1,9 +1,8 @@
 package com.pas.eater.presentation
 
 import android.os.Bundle
-import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -12,43 +11,24 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView.LABEL_VISIBILITY_LABELED
 import com.pas.eater.R
 import com.pas.eater.databinding.ActivityMainBinding
-import com.pas.eater.domain.use_case.GetDishesUseCase
-import com.pas.eater.domain.use_case.UpdateDishesUseCase
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.stateIn
-import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @AndroidEntryPoint
-class MainActivity: AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
 
-    @Inject lateinit var updateUseCase: UpdateDishesUseCase
-
-    @Inject lateinit var getUseCase: GetDishesUseCase
-
-    private lateinit var binding: ActivityMainBinding
+    private var _binding: ActivityMainBinding? = null
+    val binding get() = _binding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        _binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding?.root)
 
-        setSupportActionBar(binding.fakeToolbar.toolbar)
+        setSupportActionBar(binding?.tbHome?.toolbarHome)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
 
         navigationSettings()
-
-        lifecycleScope.launch {
-            updateUseCase.invoke().collect {
-                Log.w("TEST", it.toString())
-            }
-        }
-
-        lifecycleScope.launch {
-            getUseCase.invoke().stateIn(lifecycleScope).collect {
-                Log.w("TEST1", it.toString())
-            }
-        }
     }
 
     private fun navigationSettings() {
@@ -56,8 +36,8 @@ class MainActivity: AppCompatActivity() {
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.navController
 
-        val navView: BottomNavigationView = binding.navView
-        navView.labelVisibilityMode = LABEL_VISIBILITY_LABELED
+        val navView: BottomNavigationView? = binding?.navView
+        navView?.labelVisibilityMode = LABEL_VISIBILITY_LABELED
 
         val appBarConfiguration = AppBarConfiguration(
             setOf(
@@ -68,6 +48,15 @@ class MainActivity: AppCompatActivity() {
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
-        navView.setupWithNavController(navController)
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.navigation_category -> binding?.tbHome?.toolbarHome?.visibility = View.GONE
+                else -> binding?.tbHome?.toolbarHome?.visibility = View.VISIBLE
+            }
+        }
+
+        navView?.setupWithNavController(navController)
     }
+
 }
