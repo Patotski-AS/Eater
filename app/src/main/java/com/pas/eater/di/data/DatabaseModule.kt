@@ -8,6 +8,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import com.pas.eater.data.data_sourse.db.EaterDatabase
+import com.pas.eater.data.data_sourse.db.dao.BasketDao
 import com.pas.eater.data.data_sourse.db.dao.CategoriesDao
 import com.pas.eater.data.data_sourse.db.dao.DishesDao
 import javax.inject.Singleton
@@ -36,6 +37,10 @@ object DatabaseModule {
         return database.categoriesDao
     }
 
+    @Provides
+    @Singleton
+    fun provideBasketDao(database: EaterDatabase): BasketDao {
+        return database.basketDao
+    }
+
 }
-
-
